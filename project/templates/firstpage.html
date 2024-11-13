@@ -5,86 +5,91 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Library Website</title>
+    <!-- Use Google Fonts for a modern and professional look -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'first.css' %}">
 </head>
 <body>
+    
     <!-- Dark Mode Toggle Button -->
     <div class="toggle-switch">
         <input type="checkbox" id="darkModeToggle" onclick="toggleDarkMode()">
-        <label for="darkModeToggle"></label>
+        <label for="darkModeToggle" class="slider"></label>
     </div>
 
-    <header>
-        <h1>Welcome to Our Library</h1>
+
+    <!-- Header Section -->
+    <header class="text-center py-5">
+        <h1 class="display-4 font-weight-bold">Welcome to Our Library</h1>
     </header>
 
-    <nav>
-        <a href="#about">About Us</a>
-        <a href="#login-register">Login / Register</a>
-        <a href="#rules">Library Rules</a>
-        <a href="#timing">Timings</a>
-        <a href="#services">Services</a>
-        <a href="#staff">Staff Details</a>
+    <!-- Navigation Menu -->
+    <nav class="navigation text-center mb-5">
+        <a href="#about" class="nav-link">About Us</a>
+        <a href="#login-register" class="nav-link">Login / Register</a>
+        <a href="#rules" class="nav-link">Library Rules</a>
+        <a href="#timing" class="nav-link">Timings</a>
+        <a href="#services" class="nav-link">Services</a>
+        <a href="#staff" class="nav-link">Staff Details</a>
     </nav>
 
-    <section>
-        <img src="./photo/OIG1.jpg" class="im" alt="Library Image">
+    <!-- Main Image Section -->
+    <section class="main-image-section text-center">
+        <img src="{% static 'photo/OIG1.jpg' %}" class="im img-fluid shadow rounded" alt="Library Image">
     </section>
-    
-    <section id="about">
-        <h2>About Us</h2>
-        <p>Welcome to our library! We are dedicated to providing resources and a quiet space for reading, research, and learning.</p>
+
+    <!-- About Section -->
+    <section id="about" class="info-section py-5">
+        <h2 class="section-title text-center">About Us</h2>
+        <p class="text-center">Welcome to our library! We are dedicated to providing resources and a quiet space for reading, research, and learning.</p>
     </section>
-    
-    <section id="login-register">
-        <h2>Login / Register</h2>
-        <div class="form-container">
-            <label for="login">Login as:</label>
-            <select id="login" class="dropdown loc">
-                <option value="select">select</option>
-                <option value="admin">Admin</option>
-                <option value="student"><a href="{%url 'login'%}">Student</a></option>
-            </select>
-            <label for="register">Register as:</label>
-            <select id="register" class="dropdown loc">
-                <option value="select">Select</option>
-                <a href="{%url 'register'%}"><option value="student">Student</option></a>
-            </select>
+
+    <!-- Login/Register Section -->
+    <section id="login-register" class="info-section py-5">
+        <h2 class="section-title text-center">Login / Register</h2>
+        <div class="form-container text-center">
+            <a href="{% url 'home' %}" class="btn btn-primary btn-lg mx-2">Login</a>
+            <a href="{% url 'register' %}" class="btn btn-secondary btn-lg mx-2">Register</a>
         </div>
     </section>
-    
-    <section id="rules">
-        <h2>Library Rules</h2>
-        <ul>
+
+    <!-- Library Rules Section -->
+    <section id="rules" class="info-section py-5">
+        <h2 class="section-title text-center">Library Rules</h2>
+        <ul class="rules-list text-center">
             <li>Maintain silence at all times.</li>
             <li>No food or drinks allowed inside the library.</li>
             <li>Return books on time to avoid late fees.</li>
             <li>Handle books and materials with care.</li>
         </ul>
     </section>
-    
-    <section id="timing">
-        <h2>Timings</h2>
-        <p>Our library is open Monday to Friday from 9:00 AM to 8:00 PM and Saturday from 10:00 AM to 5:00 PM.</p>
+
+    <!-- Timings Section -->
+    <section id="timing" class="info-section py-5">
+        <h2 class="section-title text-center">Timings</h2>
+        <p class="text-center">Our library is open Monday to Friday from 9:00 AM to 8:00 PM and Saturday from 10:00 AM to 5:00 PM.</p>
     </section>
-    
-    <section id="services">
-        <h2>Services</h2>
-        <p>We offer a wide range of services including book lending, digital resources, study rooms, and reference assistance.</p>
+
+    <!-- Services Section -->
+    <section id="services" class="info-section py-5">
+        <h2 class="section-title text-center">Services</h2>
+        <p class="text-center">We offer a wide range of services including book lending, digital resources, study rooms, and reference assistance.</p>
     </section>
-    
-    <section id="staff">
-        <h2>Library Staff</h2>
-        <p>Our staff is here to assist you with finding resources, managing library accounts, and more.</p>
-        <ul>
-            <li>John Doe - Head Librarian</li>
-            <li>Jane Smith - Assistant Librarian</li>
-            <li>Sam Brown - Technical Support</li>
+
+    <!-- Staff Section -->
+    <section id="staff" class="info-section py-5">
+        <h2 class="section-title text-center">Library Staff</h2>
+        <p class="text-center">Our staff is here to assist you with finding resources, managing library accounts, and more.</p>
+        <ul class="staff-list text-center">
+            <li><strong>John Doe</strong> - Head Librarian</li>
+            <li><strong>Jane Smith</strong> - Assistant Librarian</li>
+            <li><strong>Sam Brown</strong> - Technical Support</li>
         </ul>
     </section>
 
-    <footer>
-        <div class="text-center">
+    <!-- Footer Section -->
+    <footer class="text-center py-3">
+        <div class="footer-text">
             © 2024 Our Library. All rights reserved.
         </div>
     </footer>
