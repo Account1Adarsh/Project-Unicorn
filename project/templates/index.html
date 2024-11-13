@@ -1,0 +1,351 @@
+{% extends 'base.html' %}
+{% comment %} {% extends 'base.html' %}
+
+{% block content %}
+<script>
+    // Toggle between light and dark modes with a smooth transition
+    function toggleMode() {
+        const body = document.body;
+        const isDark = body.classList.contains('dark-mode');
+        
+        body.classList.toggle('dark-mode', !isDark);
+        body.classList.toggle('light-mode', isDark);
+        
+        // Save theme preference
+        localStorage.setItem('mode', isDark ? 'light' : 'dark');
+    }
+
+    // Set initial theme based on localStorage
+    document.addEventListener('DOMContentLoaded', function () {
+        const savedMode = localStorage.getItem('mode') || 'light';
+        document.body.classList.add(savedMode + '-mode');
+    });
+
+    // Smooth scrolling function
+    function scrollToSection(sectionId) {
+        document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+    }
+</script>
+
+<!-- Fixed Header with Website Name and Navigation Links -->
+<header class="fixed-top bg-primary text-white py-3 px-5 d-flex justify-content-between align-items-center">
+    <h1 class="website-name" onclick="scrollToSection('home')">OpenLib</h1>
+    <nav>
+        <a href="#" onclick="scrollToSection('about')" class="text-white mx-3">About</a>
+        <a href="#" onclick="scrollToSection('profile')" class="text-white mx-3">Profile</a>
+        <a href="#" onclick="scrollToSection('search')" class="text-white mx-3">Search</a>
+        <button onclick="toggleMode()" class="btn btn-outline-light ml-3">Toggle Dark Mode</button>
+    </nav>
+</header>
+
+<div class="container mt-5 pt-5">
+    <!-- Welcome Section -->
+    <div id="home" class="mt-5 pt-5 text-center">
+        <h1>Welcome, {{ request.user.username }}</h1>
+        <a href="{% url 'logout' %}" class="btn btn-dark mb-4">Logout</a>
+    </div>
+
+    <!-- Search Bar -->
+    <div id="search" class="mb-4">
+        <input type="text" class="form-control search-bar" placeholder="Search books..." id="searchBar" />
+    </div>
+
+    <!-- Book Categories -->
+    <section>
+        <h2>Book Categories</h2>
+        <div class="d-flex flex-wrap mb-4">
+            <div class="btn-group m-2">
+                <button class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown">Academic</button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">CSE</a></li>
+                    <li><a class="dropdown-item" href="#">ECE</a></li>
+                    <li><a class="dropdown-item" href="#">ME</a></li>
+                    <li><a class="dropdown-item" href="#">EE</a></li>
+                </ul>
+            </div>
+            <a href="#" class="btn btn-outline-primary m-2">Non-Academic</a>
+        </div>
+    </section>
+
+    <!-- Available Books (Product Grid) -->
+    <section>
+        <h2>Available Books</h2>
+        <div class="row">
+            {% for book in books %}
+            <div class="col-md-3 mb-4">
+                <div class="card product-card shadow-sm">
+                    <img src="{{ book.cover_image_url }}" class="card-img-top" alt="{{ book.title }}">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">{{ book.title }}</h5>
+                        <p class="text-muted">Author: {{ book.author }}</p>
+                        <p class="card-text">Category: {{ book.category }}</p>
+                        <p class="card-text">Available Copies: {{ book.available_copies }}</p>
+                        <a href="#" class="btn btn-primary mt-2">View Details</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section mt-5">
+        <h2>About the Library</h2>
+        <p>This digital library offers a variety of resources tailored to students and faculty. Easily search and filter through categories to find the books you need for learning and leisure!</p>
+    </section>
+
+    <!-- User Profile Section -->
+    <section id="profile" class="profile-section mt-5">
+        <h2>Your Profile</h2>
+        <div class="card shadow-sm p-3">
+            <p><strong>Username:</strong> {{ request.user.username }}</p>
+            <p><strong>Email:</strong> {{ request.user.email }}</p>
+            <p><strong>Account Type:</strong> {% if user_is_acadmin %} ACAdmin {% else %} Non-ACAdmin {% endif %}</p>
+        </div>
+    </section>
+</div>
+
+<style>
+    /* Light mode and dark mode styling */
+    .light-mode {
+        --bg-color: #ffffff;
+        --text-color: #000000;
+    }
+
+    .dark-mode {
+        --bg-color: #121212;
+        --text-color: #e0e0e0;
+    }
+
+    body.light-mode, body.dark-mode {
+        transition: background-color 0.3s, color 0.3s;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+    }
+
+    /* Styling for card shadows, button hover, and spacing adjustments */
+    .product-card {
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .product-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Profile Section Card Styling */
+    .profile-section .card {
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        border: 1px solid rgba(255, 255, 255, 0.1); /* subtle border for separation */
+    }
+    .profile-section .card p {
+        color: var(--text-color); /* Ensure consistent text color */
+    }
+
+    /* Adjustments for header styling */
+    header.fixed-top {
+        z-index: 1000;
+    }
+</style>
+
+
+{% endblock %} {% endcomment %}
+{% block content %}
+<script>
+    // Toggle between light and dark modes with a smooth transition
+    function toggleMode() {
+        const body = document.body;
+        const isDark = body.classList.contains('dark-mode');
+        
+        body.classList.toggle('dark-mode', !isDark);
+        body.classList.toggle('light-mode', isDark);
+        
+        // Update toggle button status
+        document.getElementById('toggleButton').checked = !isDark;
+        
+        // Save theme preference
+        localStorage.setItem('mode', isDark ? 'light' : 'dark');
+    }
+
+    // Set initial theme based on localStorage
+    document.addEventListener('DOMContentLoaded', function () {
+        const savedMode = localStorage.getItem('mode') || 'light';
+        document.body.classList.add(savedMode + '-mode');
+        document.getElementById('toggleButton').checked = savedMode === 'dark';
+    });
+
+    // Smooth scrolling function
+    function scrollToSection(sectionId) {
+        document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+    }
+</script>
+
+<!-- Fixed Header with Website Name and Navigation Links -->
+<header class="fixed-top bg-primary text-white py-3 px-5 d-flex justify-content-between align-items-center">
+    <h1 class="website-name" onclick="scrollToSection('home')">OpenLib</h1>
+    <nav>
+        <a href="#" onclick="scrollToSection('about')" class="text-white mx-3">About</a>
+        <a href="#" onclick="scrollToSection('profile')" class="text-white mx-3">Profile</a>
+        <a href="#" onclick="scrollToSection('search')" class="text-white mx-3">Search</a>
+        
+        <!-- Toggle switch button for dark mode -->
+        <label class="toggle-switch">
+            <input type="checkbox" id="toggleButton" onclick="toggleMode()">
+            <span class="slider round"></span>
+        </label>
+    </nav>
+</header>
+
+<div class="container mt-5 pt-5">
+    <!-- Welcome Section -->
+    <div id="home" class="mt-5 pt-5 text-center">
+        <h1>Welcome, {{ request.user.username }}</h1>
+        <a href="{% url 'logout' %}" class="btn btn-dark mb-4">Logout</a>
+    </div>
+
+    <!-- Search Bar -->
+    <div id="search" class="mb-4">
+        <input type="text" class="form-control search-bar" placeholder="Search books..." id="searchBar" />
+    </div>
+
+    <!-- Book Categories -->
+    <section>
+        <h2>Book Categories</h2>
+        <div class="d-flex flex-wrap mb-4">
+            <div class="btn-group m-2">
+                <button class="btn btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown">Academic</button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">CSE</a></li>
+                    <li><a class="dropdown-item" href="#">ECE</a></li>
+                    <li><a class="dropdown-item" href="#">ME</a></li>
+                    <li><a class="dropdown-item" href="#">EE</a></li>
+                </ul>
+            </div>
+            <a href="#" class="btn btn-outline-primary m-2">Non-Academic</a>
+        </div>
+    </section>
+
+    <!-- Available Books (Product Grid) -->
+    <section>
+        <h2>Available Books</h2>
+        <div class="row">
+            {% for book in books %}
+            <div class="col-md-3 mb-4">
+                <div class="card product-card shadow-sm">
+                    <img src="{{ book.cover_image_url }}" class="card-img-top" alt="{{ book.title }}">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">{{ book.title }}</h5>
+                        <p class="text-muted">Author: {{ book.author }}</p>
+                        <p class="card-text">Category: {{ book.category }}</p>
+                        <p class="card-text">Available Copies: {{ book.available_copies }}</p>
+                        <a href="#" class="btn btn-primary mt-2">View Details</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-section mt-5">
+        <h2>About the Library</h2>
+        <p>This digital library offers a variety of resources tailored to students and faculty. Easily search and filter through categories to find the books you need for learning and leisure!</p>
+    </section>
+
+    <!-- User Profile Section -->
+    <section id="profile" class="profile-section mt-5">
+        <h2>Your Profile</h2>
+        <div class="card shadow-sm p-3">
+            <p><strong>Username:</strong> {{ request.user.username }}</p>
+            <p><strong>Email:</strong> {{ request.user.email }}</p>
+            <p><strong>Account Type:</strong> {% if user_is_acadmin %} ACAdmin {% else %} Non-ACAdmin {% endif %}</p>
+        </div>
+    </section>
+</div>
+
+<style>
+    /* Light mode and dark mode styling */
+    .light-mode {
+        --bg-color: #ffffff;
+        --text-color: #000000;
+    }
+
+    .dark-mode {
+        --bg-color: #121212;
+        --text-color: #e0e0e0;
+    }
+
+    body.light-mode, body.dark-mode {
+        transition: background-color 0.3s, color 0.3s;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+    }
+
+    /* Toggle switch styling */
+    .toggle-switch {
+        position: relative;
+        display: inline-block;
+        width: 50px;
+        height: 25px;
+    }
+
+    .toggle-switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        transition: 0.4s;
+        border-radius: 25px;
+    }
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 18px;
+        width: 18px;
+        left: 4px;
+        bottom: 3.5px;
+        background-color: white;
+        transition: 0.4s;
+        border-radius: 50%;
+    }
+
+    input:checked + .slider {
+        background-color: #4CAF50;
+    }
+
+    input:checked + .slider:before {
+        transform: translateX(24px);
+    }
+
+    /* Additional styling for elements */
+    .product-card {
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .product-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    }
+    .profile-section .card {
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .profile-section .card p {
+        color: var(--text-color);
+    }
+    header.fixed-top {
+        z-index: 1000;
+    }
+</style>
+
+{% endblock %}

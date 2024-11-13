@@ -1,0 +1,143 @@
+/* General Styling */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f7fa;
+    color: #333;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+/* Header */
+header {
+    background-color: #2779f3;
+    color: #fdfdfd;
+    padding: 1.5rem 0;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Navigation Bar */
+nav {
+    background-color: #f5f7fa;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+nav a {
+    color: #4a6fa5;
+    font-weight: bold;
+    margin: 0 0.5rem;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+nav a:hover {
+    background-color: #4a6fa5;
+    color: #fdfdfd;
+}
+
+/* Section Styling */
+section {
+    padding: 2rem;
+    margin: 1rem auto;
+    width: 80%;
+    max-width: 800px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Light/Dark Mode Toggle Button */
+.toggle-switch {
+    position: fixed;
+    top: 1.5rem;
+    right: 1.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.toggle-switch input[type="checkbox"] {
+    display: none;
+}
+
+.toggle-switch label {
+    cursor: pointer;
+    width: 50px;
+    height: 24px;
+    background-color: #ccc;
+    display: inline-block;
+    border-radius: 24px;
+    position: relative;
+    transition: background-color 0.3s;
+}
+
+.toggle-switch label::after {
+    content: "";
+    width: 20px;
+    height: 20px;
+    background-color: #fff;
+    border-radius: 50%;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    transition: transform 0.3s;
+}
+
+.toggle-switch input[type="checkbox"]:checked + label {
+    background-color: #4a6fa5;
+}
+
+.toggle-switch input[type="checkbox"]:checked + label::after {
+    transform: translateX(26px);
+}
+
+/* Footer Styling */
+footer {
+    background-color: #2779f3;
+    color: #fdfdfd;
+    padding: 2rem 0;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+/* Dark Mode Styles */
+body.dark-mode {
+    background-color: #1b1b1b;
+    color: #f5f5f5;
+}
+
+body.dark-mode header,
+body.dark-mode footer,
+body.dark-mode nav a {
+    color: #fdfdfd;
+}
+
+body.dark-mode section {
+    background-color: #333;
+    color: #f0f0f0;
+}
+
+body.dark-mode nav a {
+    color: #fdfdfd;
+    background-color: transparent;
+}
+
+body.dark-mode nav a:hover {
+    background-color: #555;
+    color: #fdfdfd;
+}
+
+body.dark-mode .toggle-switch label {
+    background-color: #555;
+}
+
+body.dark-mode .toggle-switch input[type="checkbox"]:checked + label {
+    background-color: #4a6fa5;
+}
